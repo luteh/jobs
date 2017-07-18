@@ -1,8 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
-import {TabNavigator} from 'react-navigation'
+import {StyleSheet, Text, View, Dimensions, Platform} from 'react-native';
+import {TabNavigator, StackNavigator} from 'react-navigation'
 import AuthScreen from './Screens/AuthScreen'
 import WelcomeScreen from './Screens/WelcomeScreen'
+import ReviewScreen from './Screens/ReviewScreen'
+import SettingsScreen from './Screens/SettingsScreen'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 export default class App extends React.Component {
@@ -10,20 +12,34 @@ export default class App extends React.Component {
     render() {
         const MainNavigator = TabNavigator({
                 welcome: {screen: WelcomeScreen},
-                auth: {screen: AuthScreen}
+                auth: {screen: AuthScreen},
+                review: {
+                    screen: StackNavigator({
+                        review: {screen: ReviewScreen},
+                        settings: {screen: SettingsScreen}
+                    })
+                }
             },
             {
-                //Issues tabnavigator doesnt have default width on android, must declare width value
                 tabBarOptions: {
+                    //Issues tabnavigator doesnt have default width on android, must declare width value
                     style: {
                         width: SCREEN_WIDTH
+                    },
+                },
+                ...Platform.select({
+                    android: {
+
+                        tabBarPosition: 'bottom'
+                    },
+                    ios:{
+                        swipeEnabled:true
                     }
-                }
-            });
+                })
+            }
+        );
         return (
-            <View style={styles.container}>
-                <MainNavigator/>
-            </View>
+            <MainNavigator/>
         );
     }
 }
