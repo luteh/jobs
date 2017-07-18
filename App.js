@@ -21,15 +21,14 @@ export default class App extends React.Component {
                 }
             },
             {
-                tabBarOptions: {
-                    //Issues tabnavigator doesnt have default width on android, must declare width value
-                    style: {
-                        width: SCREEN_WIDTH
-                    },
-                },
                 ...Platform.select({
                     android: {
-
+                        tabBarOptions: {
+                            //Issues tabnavigator doesnt have default width on android, must declare width value
+                            style: {
+                                width: SCREEN_WIDTH
+                            },
+                        },
                         tabBarPosition: 'bottom'
                     },
                     ios:{
