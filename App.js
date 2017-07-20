@@ -5,6 +5,8 @@ import AuthScreen from './Screens/AuthScreen'
 import WelcomeScreen from './Screens/WelcomeScreen'
 import ReviewScreen from './Screens/ReviewScreen'
 import SettingsScreen from './Screens/SettingsScreen'
+import {Provider} from 'react-redux'
+import store from './store'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 export default class App extends React.Component {
@@ -31,14 +33,16 @@ export default class App extends React.Component {
                         },
                         tabBarPosition: 'bottom'
                     },
-                    ios:{
-                        swipeEnabled:true
+                    ios: {
+                        swipeEnabled: true
                     }
                 })
             }
         );
         return (
-            <MainNavigator/>
+            <Provider store={store}>
+                <MainNavigator/>
+            </Provider>
         );
     }
 }
