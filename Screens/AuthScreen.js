@@ -12,6 +12,7 @@ class AuthScreen extends Component {
         this.onAuthComplete(this.props)
     }
 
+    // will be invoke when catch any new props from auth reducer
     componentWillReceiveProps(nextProps){
         this.onAuthComplete(nextProps)
     }
