@@ -23,6 +23,11 @@ export default class App extends React.Component {
                 }
             },
             {
+                // lazy property, to render one by one tab navigator screen when the screen is opened
+                lazy: true,
+                navigationOptions: {
+                    tabBarVisible:false
+                },
                 ...Platform.select({
                     android: {
                         tabBarOptions: {
