@@ -1,10 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, Dimensions, Platform} from 'react-native';
+import {Dimensions, Platform} from 'react-native';
 import {TabNavigator, StackNavigator} from 'react-navigation'
 import AuthScreen from './Screens/AuthScreen'
 import WelcomeScreen from './Screens/WelcomeScreen'
 import ReviewScreen from './Screens/ReviewScreen'
 import SettingsScreen from './Screens/SettingsScreen'
+import MapScreen from './Screens/MapScreen'
+import DeckScreen from './Screens/DeckScreen'
 import {Provider} from 'react-redux'
 import store from './store'
 
@@ -15,18 +17,25 @@ export default class App extends React.Component {
         const MainNavigator = TabNavigator({
                 welcome: {screen: WelcomeScreen},
                 auth: {screen: AuthScreen},
-                review: {
-                    screen: StackNavigator({
-                        review: {screen: ReviewScreen},
-                        settings: {screen: SettingsScreen}
-                    })
-                }
+                main: {
+                    screen: TabNavigator({
+                        map: {screen: MapScreen},
+                        deck: {screen: DeckScreen},
+                        review: {
+                            screen: StackNavigator({
+                                review: {screen: ReviewScreen},
+                                settings: {screen: SettingsScreen}
+                            })
+                        }
+                    }),
+                },
+
             },
             {
                 // lazy property, to render one by one tab navigator screen when the screen is opened
                 lazy: true,
                 navigationOptions: {
-                    tabBarVisible:false
+                    tabBarVisible: false
                 },
                 ...Platform.select({
                     android: {
@@ -51,12 +60,3 @@ export default class App extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});

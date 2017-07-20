@@ -2,7 +2,7 @@
  * Created by Luteh on 13/07/2017.
  */
 import React, {Component} from 'react'
-import {View, Text} from 'react-native'
+import {View, Text, AsyncStorage} from 'react-native'
 import Slides from '../components/Slides'
 
 const SLIDE_DATA = [
