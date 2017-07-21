@@ -2,7 +2,7 @@
  * Created by Luteh on 13/07/2017.
  */
 import React, {Component} from 'react'
-import {View, Text, AsyncStorage} from 'react-native'
+import {View, Text} from 'react-native'
 import {connect} from 'react-redux'
 import * as actions from '../actions'
 
@@ -25,13 +25,7 @@ class AuthScreen extends Component {
 
     render() {
         return (
-            <View>
-                <Text>AuthScreen</Text>
-                <Text>AuthScreen</Text>
-                <Text>AuthScreen</Text>
-                <Text>AuthScreen</Text>
-                <Text>AuthScreen</Text>
-            </View>
+            <View/>
         )
     }
 }
