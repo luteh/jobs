@@ -26,6 +26,7 @@ export const fetchJobs = (region, callback) => async (dispatch) => {
         // Use to take an input latitude longitude and output is zipcode
         let zip = await reverseGeocode(region);
         const url = buildJobsUrl(zip);
+        console.log(url);
         let {data} = await axios.get(url);
         dispatch({type: FETCH_JOBS, payload: data});
         callback();
