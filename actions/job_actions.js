@@ -3,6 +3,7 @@ import qs from 'qs'
 import reverseGeocode from 'latlng-to-zip'
 import {FETCH_JOBS} from './types'
 
+
 // turn into url save query string using qs library (query string)
 const JOB_ROOT_URL = 'http://api.indeed.com/ads/apisearch?';
 const JOB_QUERY_PARAMS = {
@@ -27,7 +28,6 @@ export const fetchJobs = (region) => async (dispatch) => {
         const url = buildJobsUrl(zip);
         let {data} = await axios.get(url);
         dispatch({type: FETCH_JOBS, payload: data});
-        console.log(data)
     } catch (e) {
         console.error(e)
     }
