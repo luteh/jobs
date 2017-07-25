@@ -31,7 +31,8 @@ export default class App extends React.Component {
                         {
                             ...Platform.select({
                                 android: {
-                                    tabBarPosition: 'bottom'
+                                    tabBarPosition: 'bottom',
+                                    swipeEnabled: false
                                 }
                             })
                         }),

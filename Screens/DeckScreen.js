@@ -18,15 +18,16 @@ class DeckScreen extends Component {
             latitudeDelta: 0.02
         };
         return (
-            <Card title={job.jobTitle}>
-                <View>
+            <Card title={job.jobtitle}>
+                <View style={{height: 300}}>
                     <MapView
-                        scrollEnabled=false
+                        scrollEnabled={false}
                         style={{flex: 1}}
                         // cacheEnabled : turn component to be image if true, but use more memory
                         cacheEnabled={Platform.OS === 'android' ? true : false}
                         initialRegion={initialRegion}
-                    />
+                    >
+                    </MapView>
                 </View>
                 <View style={styles.detailWrapper}>
                     <Text>{job.company}</Text>
