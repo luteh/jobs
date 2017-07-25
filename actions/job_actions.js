@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import reverseGeocode from 'latlng-to-zip'
-import {FETCH_JOBS} from './types'
+import {FETCH_JOBS, LIKE_JOB} from './types'
 
 
 // turn into url save query string using qs library (query string)
@@ -31,5 +31,12 @@ export const fetchJobs = (region, callback) => async (dispatch) => {
         callback();
     } catch (e) {
         console.error(e)
+    }
+};
+
+export const likeJob = (job) => {
+    return {
+        payload: job,
+        type: LIKE_JOB
     }
 };
