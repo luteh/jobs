@@ -2,7 +2,7 @@
  * Created by Luteh on 13/07/2017.
  */
 import React, {Component} from 'react'
-import {View, Text} from 'react-native'
+import {View, Text, Platform} from 'react-native'
 import {MapView} from 'expo'
 import {Card, Button} from 'react-native-elements'
 import {connect} from 'react-redux'
@@ -11,8 +11,23 @@ import Swipe from '../components/Swipe'
 class DeckScreen extends Component {
 
     renderCard(job) {
+        const initialRegion = {
+            longitude: job.longitude,
+            latitude: job.latitude,
+            longitudeDelta: 0.045,
+            latitudeDelta: 0.02
+        };
         return (
             <Card title={job.jobTitle}>
+                <View>
+                    <MapView
+                        scrollEnabled=false
+                        style={{flex: 1}}
+                        // cacheEnabled : turn component to be image if true, but use more memory
+                        cacheEnabled={Platform.OS === 'android' ? true : false}
+                        initialRegion={initialRegion}
+                    />
+                </View>
                 <View style={styles.detailWrapper}>
                     <Text>{job.company}</Text>
                     <Text>{job.formattedRelativeTime}</Text>
@@ -24,8 +39,8 @@ class DeckScreen extends Component {
         )
     }
 
-    renderNoMoreCard(){
-        return(
+    renderNoMoreCard() {
+        return (
             <Card title="No More Jobs!">
 
             </Card>
