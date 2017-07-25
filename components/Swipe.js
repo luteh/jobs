@@ -21,7 +21,9 @@ class Swipe extends Component {
         onSwipeLeft: () => {
         },
         onSwipeRight: () => {
-        }
+        },
+        // Use keyProps defaultprops instead of keyProps props if props doesn't exist
+        keyProp: 'id'
     };
 
     constructor(props) {
@@ -120,7 +122,7 @@ class Swipe extends Component {
             return this.props.renderNoMoreCards();
         }
 
-        return this.props.data.map((item, i) => {
+        const deck = this.props.data.map((item, i) => {
             //if swipe completed, the card didnt rendered
             if (i < this.state.index) {
                 return null
@@ -130,8 +132,8 @@ class Swipe extends Component {
             if (i === this.state.index) {
                 return (
                     <Animated.View
-                        key={item.id}
-                        style={[this.getCardStyle(), styles.cardStyle]}
+                        key={item[this.props.keyProp]}
+                        style={[this.getCardStyle(), styles.cardStyle, {zIndex: 99}]}
                         {...this.state.panResponder.panHandlers}
                     >
                         {this.props.renderCard(item)}
@@ -143,13 +145,14 @@ class Swipe extends Component {
             return (
                 //add animated to this view to handle the flashing image
                 <Animated.View
-                    key={item.id}
+                    key={item[this.props.keyProp]}
                     // top: 10 * (i - this.state.index) < this style is for cascading card list
-                    style={[styles.cardStyle, {top: 10 * (i - this.state.index)}]}>
+                    style={[styles.cardStyle, {top: 10 * (i - this.state.index), zIndex: -i}]}>
                     {this.props.renderCard(item)}
                 </Animated.View>
             )
-        }).reverse();
+        });
+        return Platform.OS === 'android' ? deck : deck.reverse()
     }
 
     render() {

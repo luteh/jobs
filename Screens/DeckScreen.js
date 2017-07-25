@@ -18,7 +18,10 @@ class DeckScreen extends Component {
             latitudeDelta: 0.02
         };
         return (
-            <Card title={job.jobtitle}>
+            <Card
+                containerStyle={{height: 500}}
+                title={job.jobtitle}
+            >
                 <View style={{height: 300}}>
                     <MapView
                         scrollEnabled={false}
@@ -55,6 +58,7 @@ class DeckScreen extends Component {
                     data={this.props.jobs}
                     renderCard={this.renderCard}
                     renderNoMoreCards={this.renderNoMoreCard}
+                    keyProp="jobkey"
                 />
             </View>
         )
