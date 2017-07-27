@@ -2,7 +2,7 @@
  * Created by Luteh on 13/07/2017.
  */
 import React, {Component} from "react";
-import {Platform, Text, View, ScrollView} from "react-native";
+import {Platform, Text, View, ScrollView, Linking} from "react-native";
 import {Button, Card} from "react-native-elements";
 import {connect} from 'react-redux'
 
@@ -26,13 +26,19 @@ class ReviewScreen extends Component {
     renderLikedJobs() {
         // Map over the lists of all the different likes job which has been passing as props
         return this.props.likedJobs.map(job => {
+            const {company, formattedRelativeTime, url} = job;
             return (
                 <Card>
                     <View style={{height: 200}}>
                         <View style={styles.detailWrapper}>
-                            <Text style={styles.italics}>{job.company}</Text>
-                            <Text style={styles.italics}>{job.formattedRelativeTime}</Text>
+                            <Text style={styles.italics}>{company}</Text>
+                            <Text style={styles.italics}>{formattedRelativeTime}</Text>
                         </View>
+                        <Button
+                        title="Apply Now!"
+                        backgroundColor="#03A9F4"
+                        onPress={()=>Linking.openURL(url)}
+                        />
                     </View>
                 </Card>
             )
