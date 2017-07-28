@@ -27,7 +27,10 @@ class ReviewScreen extends Component {
     renderLikedJobs() {
         // Map over the lists of all the different likes job which has been passing as props
         return this.props.likedJobs.map(job => {
-            const {company, formattedRelativeTime, url, latitude, longitude} = job;
+            const {
+                company, formattedRelativeTime, url, latitude, longitude,
+                jobtitle, jobkey
+            } = job;
             const initialRegion = {
                 longitude,
                 latitude,
@@ -35,7 +38,7 @@ class ReviewScreen extends Component {
                 longitudeDelta: 0.02
             };
             return (
-                <Card>
+                <Card title={jobtitle} key={jobkey}>
                     <View style={{height: 200}}>
                         <MapView
                             style={{flex: 1}}
