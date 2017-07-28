@@ -5,10 +5,17 @@ import React, {Component} from 'react'
 import {View, Text, ActivityIndicator} from 'react-native'
 import {MapView} from 'expo'
 import {connect} from 'react-redux'
-import {Button} from 'react-native-elements'
+import {Button, Icon} from 'react-native-elements'
 import * as actions from '../actions'
 
 class MapScreen extends Component {
+    static navigationOptions = {
+        tabBarLabel: 'Map',
+        tabBarIcon: ({tintColor}) => (
+            <Icon name="my-location" size={30} color={tintColor}/>
+        )
+    };
+
     state = {
         mapLoaded: false,
         region: {
@@ -29,7 +36,7 @@ class MapScreen extends Component {
     };
 
     onButtonPress = () => {
-        this.props.fetchJobs(this.state.region, ()=>{
+        this.props.fetchJobs(this.state.region, () => {
             this.props.navigation.navigate('deck')
         })
     };
