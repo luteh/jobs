@@ -29,6 +29,11 @@ export default class App extends React.Component {
                             }
                         },
                         {
+                            tabBarOptions:{
+                              labelStyle:{
+                                  fontSize:12
+                              }
+                            },
                             ...Platform.select({
                                 android: {
                                     tabBarPosition: 'bottom',
@@ -37,7 +42,7 @@ export default class App extends React.Component {
                                         showIcon: true,
                                         iconStyle: {width: 30},
                                         upperCaseLabel:false
-                                    }
+                                    },
                                 }
                             })
                         }),
@@ -58,7 +63,8 @@ export default class App extends React.Component {
                                 width: SCREEN_WIDTH
                             },
                         },
-                        tabBarPosition: 'bottom'
+                        tabBarPosition: 'bottom',
+                        backBehavior:'none',
                     },
                     ios: {
                         swipeEnabled: true
