@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {LIKE_JOB} from '../actions/types'
+import {LIKE_JOB, CLEAR_LIKED_JOBS} from '../actions/types'
 
 export default function (state = [], actions) {
     switch (actions.type) {
@@ -10,6 +10,8 @@ export default function (state = [], actions) {
                 ],
                 'jobkey'
             );
+        case CLEAR_LIKED_JOBS:
+            return [];
         default:
             return state
     }

@@ -47,7 +47,13 @@ class DeckScreen extends Component {
     renderNoMoreCard() {
         return (
             <Card title="No More Jobs!">
-
+                <Button
+                    title="Back to Map"
+                    large
+                    icon={{name: 'my-location'}}
+                    backgroundColor="#03A9F4"
+                    onPress={() => this.props.navigation.navigate('map')}
+                />
             </Card>
         )
     }
@@ -58,7 +64,7 @@ class DeckScreen extends Component {
                 <Swipe
                     data={this.props.jobs}
                     renderCard={this.renderCard}
-                    renderNoMoreCards={this.renderNoMoreCard}
+                    renderNoMoreCards={this.renderNoMoreCard.bind(this)}
                     keyProp="jobkey"
                     onSwipeRight={job => this.props.likeJob(job)}
                 />
