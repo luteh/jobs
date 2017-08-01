@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dimensions, Platform, Alert} from 'react-native';
-import Expo, {Notifications} from 'expo'
+import {Notifications} from 'expo'
 import {TabNavigator, StackNavigator} from 'react-navigation'
 import registerForNotifications from './services/push_notifications'
 import AuthScreen from './Screens/AuthScreen'

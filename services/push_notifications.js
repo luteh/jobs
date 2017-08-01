@@ -6,7 +6,7 @@ const PUSH_ENDPOINT = 'http://rallycoding.herokuapp.com/api/tokens';
 
 export default async () => {
     let previousToken = await AsyncStorage.getItem('pushtoken');
-
+    console.log(previousToken);
 
     if (previousToken) {
         return;
@@ -20,7 +20,7 @@ export default async () => {
 
         // Generate the token
         let token = await Notifications.getExponentPushTokenAsync();
-        await axios.post(PUSH_ENDPOINT, {token: token});
-        await AsyncStorage.setItem('pushtoken', token)
+        await axios.post(PUSH_ENDPOINT, {token: {token}});
+        AsyncStorage.setItem('pushtoken', token)
     }
 }
