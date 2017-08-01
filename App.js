@@ -1,6 +1,8 @@
 import React from 'react';
-import {Dimensions, Platform} from 'react-native';
+import {Dimensions, Platform, Alert} from 'react-native';
+import Expo, {Notifications} from 'expo'
 import {TabNavigator, StackNavigator} from 'react-navigation'
+import registerForNotifications from './services/push_notifications'
 import AuthScreen from './Screens/AuthScreen'
 import WelcomeScreen from './Screens/WelcomeScreen'
 import ReviewScreen from './Screens/ReviewScreen'
@@ -11,7 +13,22 @@ import {Provider} from 'react-redux'
 import store from './store'
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
+
 export default class App extends React.Component {
+    componentDidMount() {
+        registerForNotifications();
+        Notifications.addListener((notification) => {
+            const {data: {text}, origin} = notification;
+
+            if (origin === 'received' && text) {
+                Alert.alert(
+                    'New Push Notification',
+                    text,
+                    [{text: 'Ok.'}]
+                )
+            }
+        })
+    }
 
     render() {
         const MainNavigator = TabNavigator({
@@ -29,10 +46,10 @@ export default class App extends React.Component {
                             }
                         },
                         {
-                            tabBarOptions:{
-                              labelStyle:{
-                                  fontSize:12
-                              }
+                            tabBarOptions: {
+                                labelStyle: {
+                                    fontSize: 12
+                                }
                             },
                             ...Platform.select({
                                 android: {
@@ -41,7 +58,7 @@ export default class App extends React.Component {
                                     tabBarOptions: {
                                         showIcon: true,
                                         iconStyle: {width: 30},
-                                        upperCaseLabel:false
+                                        upperCaseLabel: false
                                     },
                                 }
                             })
@@ -64,7 +81,7 @@ export default class App extends React.Component {
                             },
                         },
                         tabBarPosition: 'bottom',
-                        backBehavior:'none',
+                        backBehavior: 'none',
                     },
                     ios: {
                         swipeEnabled: true
